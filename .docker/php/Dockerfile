@@ -19,6 +19,10 @@ RUN apt-get install -y \
 	freetds-dev freetds-bin tdsodbc \
 	gnupg gnupg1 gnupg2
 
+RUN apt-get install -y libssh2-1-dev libssh2-1 \
+    && pecl install ssh2-1.3.1 \
+    && docker-php-ext-enable ssh2
+
 # 2. apache configs + document root
 ENV APACHE_DOCUMENT_ROOT=/var/www/html/public
 RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf

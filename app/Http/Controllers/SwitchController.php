@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Spatie\Ssh\Ssh;
 
 class SwitchController extends Controller
@@ -14,7 +15,14 @@ class SwitchController extends Controller
      */
     public function index(Request $request)
     {
+        $connection = ssh2_connect('10.0.5.112');
+        $auth = ssh2_auth_password($connection, 'admin', 'Erebro2h');
+        $stream = ssh2_exec($connection, 'show mpls l2vpn vpws-group brief');
 
+        stream_set_blocking($stream, true);
+
+        $output = ssh2_fetch_stream($stream, SSH2_STREAM_STDIO);
+        return response()->json(Str::of(stream_get_contents($output))->explode("\n"));
     }
 
     /**
