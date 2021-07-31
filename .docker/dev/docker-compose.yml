@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  zabbix-switch-api:
+    container_name: zabbix-switch-api
+    build:
+        context: ../../
+        dockerfile: ./.docker/php/Dockerfile
+    volumes:
+            - ../../:/var/www/html
+    ports:
+      - 80:80
+    restart: unless-stopped
+  pgsql-zabbix-switch-api:
+    container_name: pgsql-zabbix-switch-api
+    build:
+        context: ../../
+        dockerfile: ./.docker/pgsql/Dockerfile
+    ports:
+        - 5432:5432
+    volumes:
+        - ./pgsql/init:/docker-entrypoint-initdb.d
+        - ./pgsql/pgdata:/var/lib/postgresql
+    env_file:
+        - ../../.env
+    environment:
+        - POSTGRES_PASSWORD=MyPassword@123
+        - POSTGRES_USER=postgres
+        - POSTGRES_DB=zabbix_switch_api
+        - DATABASE_HOST=localhost
+    restart: unless-stopped
