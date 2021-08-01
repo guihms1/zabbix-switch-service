@@ -7,5 +7,5 @@ services:
       context: ../../
       dockerfile: ./.docker/php/Dockerfile
     ports:
-      - 81:81
+      - 81:80
     restart: unless-stopped
