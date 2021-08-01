@@ -42,13 +42,13 @@ class SwitchDataService implements SwitchDataServiceContract {
             }
 
             $tempArray = [
-                'VPWS-Group' => $vpwsGroup,
-                'VPN-Name' => null,
+                'VPWSGroup' => $vpwsGroup,
+                'VPNName' => null,
                 'Status' => null,
-                'Segment-1' => null,
+                'Segment1' => null,
                 'State' => null,
-                'Segment-2' => null,
-                'Pw-ID' => null,
+                'Segment2' => null,
+                'PwID' => null,
                 'State' => null,
             ];
 
