@@ -7,19 +7,23 @@ use App\Repositories\Contracts\DatacomRepository as DatacomRepositoryContract;
 
 class DatacomRepository extends SwitchRepository implements DatacomRepositoryContract
 {
-    private $sshService;
+    private $sshLib;
 
-    public function __construct(Ssh $sshService)
+    public function __construct(Ssh $sshLib)
     {
-        $this->sshService = $sshService;
+        $this->sshLib = $sshLib;
     }
 
     public function getData(array $data): array
     {
-        $this->sshService->connect($data['ip']);
-        $this->sshService->auth($data['user'], $data['password']);
-        $this->sshService->execute(config('switchs_commands.datacom'));
+        $this->sshLib->connect($data['ip']);
+        $this->sshLib->auth($data['user'], $data['password']);
+        $this->sshLib->execute(config('switchs_commands.datacom'));
 
-        return $this->sshService->getOutput();
+        $data = $this->sshLib->getOutput();
+
+        $this->sshLib->disconnect();
+
+        return $data;
     }
 }

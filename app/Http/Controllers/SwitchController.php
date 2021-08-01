@@ -18,8 +18,16 @@ class SwitchController extends Controller
 
     public function show($switchBrand, Request $request)
     {
-        return response()->json(
-            $this->swtichDataService->getData($switchBrand, $request->input()),
-        );
+        $dataToReturn = $this->swtichDataService->getData($switchBrand, $request->input());
+        $statusCode = 200;
+
+        if (!$dataToReturn) {
+            $dataToReturn = [
+                'error' => 'Something went wrong! :('
+            ];
+            $statusCode = 500;
+        }
+
+        return response()->json($dataToReturn, $statusCode);
     }
 }

@@ -35,10 +35,10 @@ class SwitchDataService implements SwitchDataServiceContract {
         }
 
         foreach ($switchData as $item) {
-            $dataToHandle = explode(" ", trim($item));
+            $dataToProcess = explode(" ", trim($item));
 
             if (is_null($vpwsGroup)) {
-                $vpwsGroup = trim($dataToHandle[0]);
+                $vpwsGroup = trim($dataToProcess[0]);
             }
 
             $tempArray = [
@@ -52,15 +52,15 @@ class SwitchDataService implements SwitchDataServiceContract {
                 'State' => null,
             ];
 
-            foreach ($dataToHandle as $itemToHandle) {
-                if ($itemToHandle === $vpwsGroup || $itemToHandle === '') {
+            foreach ($dataToProcess as $itemToProcess) {
+                if ($itemToProcess === $vpwsGroup || $itemToProcess === '') {
                     continue;
                 }
 
                 $keyToFill = array_search(null, $tempArray);
 
                 if ($keyToFill !== false) {
-                    $tempArray[$keyToFill] = trim($itemToHandle);
+                    $tempArray[$keyToFill] = trim($itemToProcess);
                 }
             }
 

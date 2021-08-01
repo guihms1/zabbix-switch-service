@@ -65,7 +65,7 @@ class Ssh implements SshContract
     public function disconnect(): void
     {
         if ($this->connection) {
-            ssh2_disconnect($this->connection);
+            ssh2_disconnect($this->stream);
         }
     }
 }
