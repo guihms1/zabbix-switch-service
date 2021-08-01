@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Services\Contracts;
+namespace App\Libraries\Contracts;
 
-interface SshService
+interface Ssh
 {
     public function connect(string $host): void;
     public function auth(string $user, string $password): void;

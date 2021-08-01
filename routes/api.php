@@ -6,4 +6,4 @@ use App\Http\Controllers\{
     SwitchController
 };
 
-Route::get('switchs', [SwitchController::class, 'index'])->name('switchs.index');
+Route::get('switchs/{switchBrand}', [SwitchController::class, 'show'])->name('switchs.show');

@@ -5,6 +5,8 @@ namespace App\Exceptions;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
 use InvalidArgumentException;
+use Exception;
+use ErrorException;
 
 class Handler extends ExceptionHandler
 {
@@ -28,21 +30,24 @@ class Handler extends ExceptionHandler
         'password_confirmation',
     ];
 
-    /**
-     * Register the exception handling callbacks for the application.
-     *
-     * @return void
-     */
     public function register()
     {
-        $this->reportable(function (Throwable $e) {
-            //
-        });
-
-        $this->reportable(function (InvalidArgumentException $e) {
+        $this->renderable(function (InvalidArgumentException $e) {
             return response()->json([
                 'error' => $e->getMessage()
             ], 400);
+        });
+
+        $this->renderable(function (ErrorException $e) {
+            return response()->json([
+                'error' => $e->getMessage()
+            ], 500);
+        });
+
+        $this->renderable(function (Exception $e) {
+            return response()->json([
+                'error' => $e->getMessage()
+            ], $e->getCode() ? $e->getCode() : 400);
         });
     }
 }

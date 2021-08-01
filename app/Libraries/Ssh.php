@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Services\Ssh;
+namespace App\Libraries;
 
-use App\Services\Contracts\SshService as SshServiceContract;
+use App\Libraries\Contracts\Ssh as SshContract;
 use InvalidArgumentException;
 use Exception;
 
-class SshService implements SshServiceContract
+class Ssh implements SshContract
 {
     private $connection;
     private $stream;
@@ -20,16 +20,16 @@ class SshService implements SshServiceContract
         $this->connection = ssh2_connect($host);
 
         if (!$this->connection) {
-            throw new Exception('Connection faild. Please, check if the host information was correct.');
+            throw new Exception('Connection faild. Please, check if the host information was correct.', 502);
         }
     }
 
     public function auth(string $user, string $password): void
     {
         if (!$this->connection) {
-            throw new Exception('The connection is not set yet.');
+            throw new Exception('The connection is not set yet.', 400);
         }
-        if (!$user || $password) {
+        if (!$user || !$password) {
             throw new InvalidArgumentException('User and password required.');
         }
         ssh2_auth_password($this->connection, $user, $password);
@@ -40,7 +40,7 @@ class SshService implements SshServiceContract
         $this->stream = ssh2_exec($this->connection, $command);
 
         if (!$this->stream) {
-            throw new Exception('Command execution failed. Please, check the data provided and the host firewall.');
+            throw new Exception('Command execution failed. Please, check the data provided and the host firewall.', 502);
         }
     }
 
