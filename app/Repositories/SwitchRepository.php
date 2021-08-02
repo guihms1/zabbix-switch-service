@@ -4,10 +4,7 @@ namespace App\Repositories;
 
 use App\Repositories\Contracts\BaseRepository as BaseRepositoryContract;
 
-class SwitchRepository implements BaseRepositoryContract
+class SwitchRepository extends BaseRepository implements BaseRepositoryContract
 {
-    public function getData(array $data): array
-    {
-        //
-    }
+    //
 }
