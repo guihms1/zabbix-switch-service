@@ -51,8 +51,6 @@ RUN docker-php-ext-install \
         zip \
         gd
 
-COPY .docker/php/laravel-worker.conf /etc/supervisor/conf.d/laravel-worker.conf
-
 #install composer
 COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
 
