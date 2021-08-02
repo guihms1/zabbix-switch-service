@@ -21,7 +21,7 @@ cd zabbix-switch-service
 cp .env.example .env
 ```
 
-3. Now, let's build our Dockerfile through the docker docker-compose:
+3. Now, let's build our Dockerfile through the docker-compose:
 ```shell
 # To run this command make sure that you are in the project folder
 
