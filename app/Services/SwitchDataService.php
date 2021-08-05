@@ -45,12 +45,12 @@ class SwitchDataService implements SwitchDataServiceContract {
             $tempArray = [
                 'VPWSGroup' => null,
                 'VPNName' => null,
-                'Status' => null,
+                'StatusVPN' => null,
                 'Segment1' => null,
-                'State' => null,
+                'StatePort' => null,
                 'Segment2' => null,
                 'PwID' => null,
-                'State' => null,
+                'StateMPLS' => null,
             ];
 
             $tempArray = $this->processSwitchData($dataToProcess, $tempArray);
