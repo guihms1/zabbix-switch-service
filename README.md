@@ -46,7 +46,7 @@ The tests and how to execute them will be here soon.
 
 ## Supported brands
 
-Actually this application only works with the **Datacom** switches, but we hope that it can change soon.
+Actually this application only works with the **Datacom** switches, but we hope it can change soon.
 
 ## How it works behind the scenes
 To connect and get all the data the monitoring services need, we use the [ssh2](https://www.php.net/manual/pt_BR/book.ssh2.php) library.
