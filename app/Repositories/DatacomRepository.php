@@ -18,7 +18,7 @@ class DatacomRepository extends SwitchRepository implements DatacomRepositoryCon
     {
         $this->sshLib->connect($data['ip']);
         $this->sshLib->auth($data['user'], $data['password']);
-        $this->sshLib->execute(config('switchs_commands.datacom'));
+        $this->sshLib->execute(config('switchs_commands.datacom.command'));
 
         $data = $this->sshLib->getOutput();
 
