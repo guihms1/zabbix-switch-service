@@ -8,7 +8,8 @@ return [
             'VPN-Name',
             'Segment-1',
             'Segment-2',
-            'Status'
+            'Status',
+            'Oper'
         ],
     ],
 ];
